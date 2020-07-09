@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1077490524672",
+    "firebase_url": "https://student-coloco-21d90.firebaseio.com",
+    "project_id": "student-coloco-21d90",
+    "storage_bucket": "student-coloco-21d90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077490524672:android:e6b3ee652c66487e326ee5",
+        "android_client_info": {
+          "package_name": "com.example.hotel_booking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077490524672-rfaqfmjt8fsise1a0m201l3qebhkqd9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8i_wrLWBfrmoHuz10CVxDlJlO4qj4dzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077490524672-rfaqfmjt8fsise1a0m201l3qebhkqd9f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
