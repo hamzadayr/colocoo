@@ -1,4 +1,4 @@
-# Hotel App
+# Co - LOCATION
 
 Co location. 
 
