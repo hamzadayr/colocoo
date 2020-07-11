@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'welcome.dart';
 import 'package:provider/provider.dart';
-import 'models/auth.dart';
 import 'models/tabs.dart';
+import 'current_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(Hatkestays());
@@ -15,10 +15,10 @@ class Hatkestays extends StatelessWidget {
     return
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(builder: (_) => Auth()),
+          ChangeNotifierProvider(builder: (_) => CurrentUser()),
           ChangeNotifierProvider(builder: (_) => Tabs()),
         ],
-        child: Consumer<Auth>(
+        child: Consumer<CurrentUser>(
           builder: (context, counter, _) {
             return MaterialApp(
               title: 'Hatke Stays',
@@ -44,11 +44,10 @@ class _AppState extends State<App> {
     final prefs = await SharedPreferences.getInstance();
     if(prefs.getString('token') != null) {
       final token = prefs.getString('token');
-      Provider.of<Auth>(context).changeToken(token);
-      Provider.of<Auth>(context).login();
+      Provider.of<CurrentUser>(context).changeToken(token);
     }
     else{
-      Provider.of<Auth>(context).logout();
+      Provider.of<CurrentUser>(context).logout();
     }
   }
   @override
@@ -59,9 +58,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
 
-
-
-    final auth = Provider.of<Auth>(context);
+    final auth = Provider.of<CurrentUser>(context);
     return auth.state? WelcomeScreen() : LoginPage();
   }
 }

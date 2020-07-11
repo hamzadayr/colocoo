@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'home.dart';
+import 'current_user.dart';
+import 'login.dart';
+import 'offres/home.dart';
 import 'profile.dart';
-import 'saved.dart';
-import 'booking.dart';
+import 'demandes/list_demandes.dart';
 import 'partials/drawer.dart';
 import 'package:provider/provider.dart';
 import 'models/tabs.dart';
@@ -21,13 +22,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return Home();
     }
     else if(Provider.of<Tabs>(context).currentIndex== 1) {
-      return Saved();
+      return Listdemandes();
     }
     else if(Provider.of<Tabs>(context).currentIndex == 2) {
-      return Bookings();
+      return ProfilePage();
     }
     else if(Provider.of<Tabs>(context).currentIndex == 3) {
-      return ProfilePage();
+      //return  LoginPage();
     }
   }
 
@@ -36,9 +37,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-        statusBarColor: Colors.teal,
+    statusBarColor: Colors.teal,
         //or set color with: Color(0xFF0000FF)
-        statusBarBrightness: Brightness.light));
+    statusBarBrightness: Brightness.light));
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -52,27 +53,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         }),
         items: [
           BottomNavyBarItem(
-              icon: Icon(Icons.store_mall_directory),
-              title: Text('HOME'),
+              icon: Icon(Icons.home),
+              title: Text('Acceuil'),
               activeColor: Colors.teal,
               inactiveColor: Colors.black54
           ),
 
           BottomNavyBarItem(
-              icon: Icon(Icons.favorite_border),
-              title: Text('WISHLIST'),
-              activeColor: Colors.teal,
-              inactiveColor: Colors.black54
-          ),
-          BottomNavyBarItem(
-              icon: Icon(Icons.card_travel),
-              title: Text('BOOKING'),
+              icon: Icon(Icons.hotel),
+              title: Text('Demandes'),
               activeColor: Colors.teal,
               inactiveColor: Colors.black54
           ),
           BottomNavyBarItem(
               icon: Icon(Icons.face),
-              title: Text('PROFILE'),
+              title: Text('Mon Compte'),
+              activeColor: Colors.teal,
+              inactiveColor: Colors.black54
+          ),
+          BottomNavyBarItem(
+              icon: Icon(Icons.lock_open),
+              title: Text('Déconnexion'),
               activeColor: Colors.teal,
               inactiveColor: Colors.black54
           ),

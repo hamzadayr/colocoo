@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../invite.dart';
 import 'package:provider/provider.dart';
+import '../current_user.dart';
+import '../login.dart';
 import '../models/tabs.dart';
-import '../models/auth.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AppDrawer extends StatelessWidget {
                           style: BorderStyle.solid,
                           width: 3.0),
                       image: DecorationImage(
-                          image: AssetImage('assets/images/ashutosh.jpg'))),
+                          image: AssetImage('assets/images/user.jpg'))),
                 ),
                 SizedBox(
                   height: 10,
@@ -34,7 +34,7 @@ class AppDrawer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Ashutosh Dubey',
+                        'DAYR Amine',
                         style: TextStyle(
                             fontFamily: 'poppins-regular',
                             fontSize: 25.0,
@@ -51,52 +51,47 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('My Bookings'),
+            title: Text('Accueil'),
             leading: Icon(Icons.card_travel),
             onTap: () {
-              Provider.of<Tabs>(context).changeIndex(2);
+              Provider.of<Tabs>(context).changeIndex(0);
               Navigator.pop(context);
             },
           ),
           Divider(),
           ListTile(
-            title: Text('Saved Hotels'),
+            title: Text('Demandes'),
             leading: Icon(Icons.folder_open),
             onTap: () {
               Provider.of<Tabs>(context).changeIndex(1);
               Navigator.pop(context);
             },
           ),
+        
           Divider(),
           ListTile(
-            title: Text('Invite and Earn'),
-            leading: Icon(Icons.whatshot),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Invite()),
-              );
-
-            },
-          ),
-          Divider(),
-          ListTile(
-            title: Text('Profile'),
+            title: Text('Mon compte'),
             leading: Icon(Icons.face),
             onTap: () {
-              Provider.of<Tabs>(context).changeIndex(3);
+              Provider.of<Tabs>(context).changeIndex(2);
               Navigator.pop(context);
             },
           ),
 
           Divider(),
           ListTile(
-            title: Text('Logout'),
+            title: Text('Déconnexion'),
             leading: Icon(Icons.lock_open),
             onTap: () {
-              Provider.of<Auth>(context).logout();
+              Provider.of<CurrentUser>(context).logout();
               Navigator.pop(context);
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        LoginPage(),
+                    fullscreenDialog: true),
+              );
             },
           ),
           Divider()

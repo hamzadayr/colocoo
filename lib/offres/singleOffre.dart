@@ -3,13 +3,13 @@ import 'dart:convert';
 Color textColor = Colors.black54;
 Color textSecondry = Colors.grey;
 
-class SingleHotel extends StatefulWidget {
+class SingleOffre extends StatefulWidget {
 
   @override
-  _SingleHotelState createState() => _SingleHotelState();
+  _SingleOffreState createState() => _SingleOffreState();
 }
 
-class _SingleHotelState extends State<SingleHotel> {
+class _SingleOffreState extends State<SingleOffre> {
   var hotel;
   var token;
 
@@ -42,7 +42,7 @@ class _SingleHotelState extends State<SingleHotel> {
 
           },
           textColor: Colors.white,
-          child: Text('BOOK',style: TextStyle(
+          child: Text('Appelez',style: TextStyle(
               fontFamily: 'Quicksand',
               color: Colors.white,
               fontWeight: FontWeight.bold

@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'hotel.dart';
+import '../map.dart';
+import 'singleOffre.dart';
 import 'nvl_offre.dart';
 class Home extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _HomeState extends State<Home> {
             SliverAppBar(
               leading: GestureDetector(child: Icon(Icons.menu),onTap: () =>
                   Scaffold.of(context).openDrawer(),),
-              expandedHeight: _height/6.5,
+              expandedHeight: _height/5,
               floating: false,
               pinned: true,
               backgroundColor: Colors.teal,
@@ -79,6 +81,7 @@ class _HomeState extends State<Home> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              
              
 
               Padding(
@@ -91,7 +94,7 @@ class _HomeState extends State<Home> {
                       children: <Widget>[
                           Container(
                           padding:EdgeInsets.fromLTRB(5,0,10,0),
-                          child: Text('Recommandé pour vous',
+                          child: Text('Vos Offres',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18
@@ -99,7 +102,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         
-                        SizedBox(width: 100),
+                        SizedBox(width: 220),
                         ClipOval(
                           child: Material(
                             color: Colors.teal[300], // button color
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> {
                               onTap: () {
                                  Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => AddOffre()),
+                                  MaterialPageRoute(builder: (context) => RunMap()),
                                 );
                               },
                             ),
@@ -131,6 +134,8 @@ class _HomeState extends State<Home> {
                           _buildApp_design1("assets/images/app4.jpg"),
                           _buildApp_design1("assets/images/app1.jpg"),
 
+                          
+
                         ],
                       ),
                     ),
@@ -147,11 +152,45 @@ class _HomeState extends State<Home> {
                     ),
            
                    SizedBox(height:20),
-                    itemCard('Grande appartement ','assets/images/app1.jpg',false),
-                    itemCard('Petit Villa','assets/images/app2.jpg',false),
-                    itemCard('Appartement ','assets/images/app3.jpg',false),
-                    itemCard('Garsoniere','assets/images/app4.jpg',false),
-                    itemCard('Studio ','assets/images/app1.jpg',false)
+
+
+
+
+               StreamBuilder<QuerySnapshot>(
+                stream: Firestore.instance.collection("offres").snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) return new Text('${snapshot.error}');
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return new Center(child: new CircularProgressIndicator());
+                    default:
+
+                      return Card(
+                        child: Column(
+                          children: <Widget>[
+                            ListView(
+                              shrinkWrap: true,
+                              children: snapshot.data.documents.map(
+                                (DocumentSnapshot document) {
+                                  return  itemCard( document['prix'], document['superficie'], document['capacite'],document['image'],"11/07/2020",false);
+                                },
+                              ).toList(),
+                            ),
+                          ],
+                        ),
+                      );
+                  }
+                },
+              ),
+        
+
+
+
+
+           
+                  //  itemCard('Garsoniere','assets/images/app4.jpg',false),
+                   // itemCard('Studio ','assets/images/app1.jpg',false),
+                    
                   ],
                 ),
               ),
@@ -167,7 +206,7 @@ class _HomeState extends State<Home> {
       onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SingleHotel()),
+          MaterialPageRoute(builder: (context) => SingleOffre()),
         );
       },
       child: Container(
@@ -213,12 +252,12 @@ class _HomeState extends State<Home> {
 
 
   
-  Widget itemCard(String title, String imgPath, bool isFavorite) {
+  Widget itemCard(String prix, String superficie, String capacite, String imgPath, String dte, bool isFavorite) {
   return  GestureDetector (
        onTap: (){
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SingleHotel()),
+          MaterialPageRoute(builder: (context) => SingleOffre()),
         );
       },
     child: Column(
@@ -237,15 +276,16 @@ class _HomeState extends State<Home> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              width: 140.0,
-              height: 160.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                image: DecorationImage(
 
-                    image: AssetImage(imgPath), fit: BoxFit.cover)),
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+                        child: Image.network(imgPath,
+                                              fit: BoxFit.cover,
+                                              width: 160,
+                                            ),
           ),
+
           SizedBox(width: 4.0),
 
           Column(
@@ -257,7 +297,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    title,
+                    superficie+" pour "+capacite+" personnes" ,
                     style: TextStyle(
                         fontFamily: 'Quicksand',
                         fontSize: 17.0,
@@ -268,7 +308,7 @@ class _HomeState extends State<Home> {
                   Container(
                     width: 175.0,
                     child: Text(
-                      '22/06/2020 12:00',
+                      dte,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontFamily: 'Quicksand',
@@ -297,7 +337,7 @@ class _HomeState extends State<Home> {
                     width: 70.0,
                     child: Center(
                       child: Text(
-                        '3000 DH',
+                        prix,
                         style: TextStyle(
                             color: Colors.black87,
                             fontFamily: 'Quicksand',
@@ -312,7 +352,7 @@ class _HomeState extends State<Home> {
                       color: Colors.teal,
                       onPressed: (){},
                       textColor: Colors.white,
-                      child: Text('Appelez',style: TextStyle(
+                      child: Text('Détails',style: TextStyle(
                           fontFamily: 'Quicksand',
                           color: Colors.white,
                           fontWeight: FontWeight.bold

@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:co_loco/current_user.dart';
 import 'package:line_icons/line_icons.dart';
 import 'dart:ui';
 import 'package:provider/provider.dart';
-import 'models/auth.dart';
 import 'models/tabs.dart';
-import 'invite.dart';
 
 const Color gradientStart = Colors.teal;
 const Color gradientEnd = Colors.greenAccent;
@@ -29,9 +28,9 @@ class ProfilePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildUserStats('HOTELS', '0'),
-          _buildUserStats('EXPERIENCES', '0'),
-          _buildUserStats('POINTS', '0'),
+          _buildUserStats('OFFRES', '0'),
+          _buildUserStats('DEMANDES', '0'),
+          _buildUserStats('COMMENTAIRES', '0'),
         ],
       ),
     );
@@ -41,7 +40,7 @@ class ProfilePage extends StatelessWidget {
       width: 100.0,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/ashutosh.jpg'),
+          image: AssetImage('assets/images/user.jpg'),
           fit: BoxFit.cover,
         ),
         shape: BoxShape.circle,
@@ -54,14 +53,14 @@ class ProfilePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Ashutosh',
+            'DAYR',
             style: TextStyle(
               fontSize: 24.0,
               fontWeight: FontWeight.w900,
             ),
           ),
           Text(
-            'Pune,MH',
+            'Amine',
             style: TextStyle(
               color: Colors.grey.withOpacity(0.6),
               fontSize: 20.0,
@@ -121,12 +120,12 @@ class ProfilePage extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              _buildIconTile(Icons.supervised_user_circle, Colors.red, 'Change Details'),
+              _buildIconTile(Icons.phone, Colors.red, 'Tele : 065698798798'),
               hr,
-              _buildIconTile(LineIcons.lock, Colors.green, 'Change Password'),
+              _buildIconTile(Icons.mail, Colors.green, 'Email : amine.dayr@gmail.com'),
               hr,
-              GestureDetector(child: _buildIconTile(LineIcons.unlock, Colors.purpleAccent, 'Logout'),onTap: (){
-                Provider.of<Auth>(context).logout();
+              GestureDetector(child: _buildIconTile(LineIcons.unlock, Colors.purpleAccent, 'Déconnexion'),onTap: (){
+                Provider.of<CurrentUser>(context).logout();
                 Navigator.pop(context);
               },),
             ],
@@ -146,20 +145,6 @@ class ProfilePage extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Column(
-            children: <Widget>[
-              GestureDetector(child: _buildIconTile(LineIcons.rupee, Colors.red, 'Invite and Earn'),onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Invite()),
-                );
-              },),
-              hr,
-              _buildIconTile(LineIcons.money, Colors.blue, 'Transactions'),
-              hr,
-              _buildIconTile(LineIcons.hotel, Colors.orangeAccent, 'Bookings'),
-            ],
           ),
         ),
       ),
@@ -196,7 +181,7 @@ class ProfilePage extends StatelessWidget {
                       )
                     ],
                   ),
-                  secondCard, thirdCard
+                    secondCard, thirdCard
                 ],
               ),
             ),

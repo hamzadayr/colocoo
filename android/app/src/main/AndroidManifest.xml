@@ -10,6 +10,16 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="hotel_booking"
         android:icon="@mipmap/ic_launcher">
+
+
+
+
+
+
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCvqLn7S2WzpJntJtsOtO7Dgnpr9KUgsgA"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
