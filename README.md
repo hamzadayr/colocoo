@@ -5,20 +5,11 @@ Co location.
 ## Screen Shots
 
 Here are some of the project screen shots.<br><br><br>
-<img src="assets/screenshots/1.png" width="250"/>
- <img src="assets/screenshots/2.png" width="250"/> 
- <img src="assets/screenshots/3.png" width="250"/> 
-
-<img src="assets/screenshots/4.png" width="250"/> 
-<img src="assets/screenshots/5.png" width="250"/> 
-<img src="assets/screenshots/6.png" width="250"/> 
+<img src="assets/screenshots/2.png" width="250"/> <img src="assets/screenshots/3.png" width="250"/> <img src="assets/screenshots/4.png" width="250"/> <img src="assets/screenshots/5.png" width="250"/> <img src="assets/screenshots/6.png" width="250"/> 
 
 
-<img src="assets/screenshots/7.png" width="250"/> 
-<img src="assets/screenshots/8.png" width="250"/> 
-<img src="assets/screenshots/9.png" width="250"/> 
-<img src="assets/screenshots/10.png" width="250"/> 
-<img src="assets/screenshots/11.png" width="250"/> 
+<img src="assets/screenshots/7.png" width="250"/> <img src="assets/screenshots/8.png" width="250"/> <img src="assets/screenshots/9.png" width="250"/> 
+<img src="assets/screenshots/10.png" width="250"/> <img src="assets/screenshots/11.png" width="250"/> 
 
 ## Developer(s)
 **DAYR Hamza**
